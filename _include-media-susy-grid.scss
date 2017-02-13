@@ -1,0 +1,153 @@
+$im-susy-grid-row-class: 'row' !default;
+$im-susy-grid-col-class: 'col' !default;
+$im-susy-grid-fraction-separator: '-' !default;
+$im-susy-grid-include-pre: false !default;
+$im-susy-grid-include-post: false !default;
+$im-susy-grid-include-pull: false !default;
+$im-susy-grid-include-squish: false !default;
+$im-susy-grid-total-cols: map-get($susy, 'columns') !default;
+$im-susy-grid-breakpoints: length($breakpoints) !default;
+$im-susy-grid-position: map-get($susy, 'gutter-position') !default;
+
+@mixin im-susy-grid() {
+
+  .#{$im-susy-grid-row-class} {
+    @include container;
+  }
+
+  @for $i from 1 to $im-susy-grid-total-cols {
+
+    .#{$im-susy-grid-col-class}--#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols} {
+      @include span($i of $im-susy-grid-total-cols);
+    }
+  }
+
+  @if $im-susy-grid-include-pre == true {
+    @for $i from 1 to $im-susy-grid-total-cols {
+
+      .#{$im-susy-grid-col-class}--pre-#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols} {
+        @include pre($i of $im-susy-grid-total-cols);
+      }
+    }
+  }
+
+  @if $im-susy-grid-include-post == true {
+    @for $i from 1 to $im-susy-grid-total-cols {
+
+      .#{$im-susy-grid-col-class}--post-#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols} {
+        @include post($i of $im-susy-grid-total-cols);
+      }
+    }
+  }
+
+  @if $im-susy-grid-include-pull == true {
+    @for $i from 1 to $im-susy-grid-total-cols {
+
+      .#{$im-susy-grid-col-class}--pull-#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols} {
+        @include pull($i of $im-susy-grid-total-cols);
+      }
+    }
+  }
+
+  @if $im-susy-grid-include-squish == true {
+    @for $i from 1 to $im-susy-grid-total-cols {
+
+      .#{$im-susy-grid-col-class}--squish-#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols} {
+        @include squish($i of $im-susy-grid-total-cols);
+      }
+    }
+  }
+
+  .#{$im-susy-grid-col-class}--first {
+    @include first;
+  }
+
+  .#{$im-susy-grid-col-class}--last {
+    @include last;
+  }
+
+  .#{$im-susy-grid-col-class}--full {
+    @include full;
+  }
+
+  .#{$im-susy-grid-col-class}--break {
+    @include break;
+  }
+
+  .#{$im-susy-grid-col-class}--no-break {
+    @include nobreak;
+  }
+
+  @for $i from 1 through $im-susy-grid-breakpoints {
+    $im-breakpoint: nth($breakpoints, $i);
+    $im-breakpoint-name: nth($im-breakpoint, 1);
+
+    @include media('>=#{$im-breakpoint-name}') {
+
+      @for $i from 1 to $im-susy-grid-total-cols {
+
+        .#{$im-susy-grid-col-class}--#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols}\@#{$im-breakpoint-name} {
+          @include span($i of $im-susy-grid-total-cols);
+        }
+      }
+
+      @if $im-susy-grid-include-pre == true {
+        @for $i from 1 to $im-susy-grid-total-cols {
+
+          .#{$im-susy-grid-col-class}--pre-#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols}\@#{$im-breakpoint-name} {
+            @include pre($i of $im-susy-grid-total-cols);
+          }
+        }
+      }
+
+      @if $im-susy-grid-include-post == true {
+        @for $i from 1 to $im-susy-grid-total-cols {
+
+          .#{$im-susy-grid-col-class}--post-#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols}\@#{$im-breakpoint-name} {
+            @include post($i of $im-susy-grid-total-cols);
+          }
+        }
+      }
+
+      @if $im-susy-grid-include-pull == true {
+        @for $i from 1 to $im-susy-grid-total-cols {
+
+          .#{$im-susy-grid-col-class}--pull-#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols}\@#{$im-breakpoint-name} {
+            @include pull($i of $im-susy-grid-total-cols);
+          }
+        }
+      }
+
+      @if $im-susy-grid-include-squish == true {
+        @for $i from 1 to $im-susy-grid-total-cols {
+
+          .#{$im-susy-grid-col-class}--squish-#{$i}#{$im-susy-grid-fraction-separator}#{$im-susy-grid-total-cols}\@#{$im-breakpoint-name} {
+            @include squish($i of $im-susy-grid-total-cols);
+          }
+        }
+      }
+
+      .#{$im-susy-grid-col-class}--first\@#{$im-breakpoint-name} {
+        @include first;
+      }
+
+      .#{$im-susy-grid-col-class}--last\@#{$im-breakpoint-name} {
+        @include last;
+      }
+
+      .#{$im-susy-grid-col-class}--full\@#{$im-breakpoint-name} {
+        @include full;
+      }
+
+      .#{$im-susy-grid-col-class}--break\@#{$im-breakpoint-name} {
+        @include break;
+      }
+
+      .#{$im-susy-grid-col-class}--no-break\@#{$im-breakpoint-name} {
+        @include nobreak;
+      }
+    }
+  }
+}
+
+@include im-susy-grid();
